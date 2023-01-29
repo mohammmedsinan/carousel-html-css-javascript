@@ -9,8 +9,75 @@
 </head>
 
 <body>
-    <style></style>
-    <script></script>
+    <div id="root">
+        <h1 id="prev">prev</h1>
+        <div id="carousel">
+            <div class="div div-1 default" style="background-color: red;"></div>
+            <div class="div div-2" style="background-color: blue;"></div>
+            <div class="div div-3" style="background-color: black;"></div>
+            <div class="div div-4" style="background-color: green;"></div>
+        </div>
+        <h1 id="next">next</h1>
+    </div>
+    <style>
+        #root {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #carousel {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .div {
+            width: 600px;
+            height: 300px;
+            position: absolute;
+            border-radius: 10px;
+            transition: all ease 0.5s;
+            opacity: 0.2;
+
+        }
+
+        h1 {
+            cursor: pointer;
+            font-size: 50px;
+        }
+
+        .default {
+            z-index: 1;
+            opacity: 1;
+        }
+    </style>
+    <script>
+        let counter = 0;
+        function defaultClassAdder(element) {
+            document.querySelector(element).classList.add("default")
+            document.querySelector('.default').classList.remove("default")
+        }
+        document.getElementById('next').addEventListener('click', e => {
+            if (counter === 0) {
+                counter = counter + 1;
+                defaultClassAdder('.div-2')
+            } else if (counter === 1) {
+                counter = counter + 1;
+                defaultClassAdder('.div-3')
+            } else if (counter === 2) {
+                counter = counter + 1;
+                defaultClassAdder('.div-4')
+            } else {
+                counter = counter
+            }
+        })
+
+    </script>
 </body>
 
 </html>
