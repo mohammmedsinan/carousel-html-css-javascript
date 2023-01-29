@@ -58,25 +58,29 @@
     </style>
     <script>
         let counter = 0;
-        function defaultClassAdder(element) {
+        function defaultClassAdder(element, operation) {
             document.querySelector(element).classList.add("default")
             document.querySelector('.default').classList.remove("default")
+            if (operation === "+") {
+                counter++;
+            } else if (operation === '-') {
+                counter--;
+            }
         }
         document.getElementById('next').addEventListener('click', e => {
             if (counter === 0) {
-                counter = counter + 1;
-                defaultClassAdder('.div-2')
+                defaultClassAdder('.div-2', "+")
             } else if (counter === 1) {
-                counter = counter + 1;
-                defaultClassAdder('.div-3')
+                defaultClassAdder('.div-3', "+")
             } else if (counter === 2) {
-                counter = counter + 1;
-                defaultClassAdder('.div-4')
-            } else {
-                counter = counter
+                defaultClassAdder('.div-4', "+")
             }
         })
-
+        document.getElementById('prev').addEventListener('click', e => {
+            if (counter === 1) {
+                defaultClassAdder('div-1', "-")
+            }
+        })
     </script>
 </body>
 
