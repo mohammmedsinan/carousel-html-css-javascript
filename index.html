@@ -12,10 +12,10 @@
     <div id="root">
         <h1 id="prev">prev</h1>
         <div id="carousel">
-            <div class="div div-1 default" style="background-color: red;"></div>
-            <div class="div div-2" style="background-color: blue;"></div>
-            <div class="div div-3" style="background-color: black;"></div>
-            <div class="div div-4" style="background-color: green;"></div>
+            <div class="div div-0 default" style="background-color: red;"></div>
+            <div class="div div-1" style="background-color: blue;"></div>
+            <div class="div div-2" style="background-color: black;"></div>
+            <div class="div div-3" style="background-color: green;"></div>
         </div>
         <h1 id="next">next</h1>
     </div>
@@ -41,9 +41,8 @@
             height: 300px;
             position: absolute;
             border-radius: 10px;
-            transition: all ease 0.5s;
-            opacity: 0.2;
-
+            transition: all ease 0.4s;
+            opacity: 0.1;
         }
 
         h1 {
@@ -58,28 +57,22 @@
     </style>
     <script>
         let counter = 0;
-        function defaultClassAdder(element, operation) {
-            document.querySelector(element).classList.add("default")
-            document.querySelector('.default').classList.remove("default")
-            if (operation === "+") {
-                counter++;
-            } else if (operation === '-') {
-                counter--;
-            }
+        let classes = [{ class: 0 }, { class: 1 }, { class: 2 }, { class: 3 }]
+        function scroller(imgs = [], operation = "",) {
+            if (operation === "+" && counter < classes.length - 1) { counter++; } else if (operation === "-" && counter > 0) { counter--; }
+            imgs.map(img => {
+                if (counter === Number(img.class)) {
+                    document.querySelector('.default').classList.remove("default")
+                    document.querySelector(`.div-${img.class}`).classList.add("default")
+                }
+            })
         }
         document.getElementById('next').addEventListener('click', e => {
-            if (counter === 0) {
-                defaultClassAdder('.div-2', "+")
-            } else if (counter === 1) {
-                defaultClassAdder('.div-3', "+")
-            } else if (counter === 2) {
-                defaultClassAdder('.div-4', "+")
-            }
+            scroller(classes, "+")
         })
         document.getElementById('prev').addEventListener('click', e => {
-            if (counter === 1) {
-                defaultClassAdder('div-1', "-")
-            }
+            scroller(classes, "-")
+
         })
     </script>
 </body>
